@@ -13,7 +13,7 @@ class EcommerceApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return const MaterialApp(
       debugShowCheckedModeBanner: false,
-      initialRoute: AppRoutes.homeRoute,
+      initialRoute: AppRoutes.detailsRoute,
       onGenerateRoute: AppRoutes.generateRoute,
     );
   }

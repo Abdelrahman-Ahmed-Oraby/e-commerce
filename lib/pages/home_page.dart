@@ -1,4 +1,6 @@
 import 'package:ecommerce_app/constants/colors.dart';
+import 'package:ecommerce_app/models/product_item.dart';
+import 'package:ecommerce_app/widgets/custom_grid_item.dart';
 import 'package:flutter/material.dart';
 
 class Home extends StatelessWidget {
@@ -8,6 +10,7 @@ class Home extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+      backgroundColor: Colors.white,
         appBar: AppBar(
           iconTheme: const IconThemeData(
             color: Colors.white,
@@ -114,6 +117,22 @@ class Home extends StatelessWidget {
               )
             ],
           ),
+        ),
+        body: Padding(
+          padding: const EdgeInsets.only(top: 22),
+          child: GridView.builder(
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2,
+                childAspectRatio: 3 / 2,
+                crossAxisSpacing: 10,
+                mainAxisSpacing: 33,
+              ),
+              itemCount: 8,
+              itemBuilder: (BuildContext context, int index) {
+                return CustomGridItem(
+                  productItem: items[index],
+                );
+              }),
         ),
       ),
     );
