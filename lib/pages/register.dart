@@ -1,11 +1,11 @@
+import 'package:ecommerce_app/app_routes.dart';
 import 'package:ecommerce_app/constants/colors.dart';
 import 'package:flutter/material.dart';
 
-import '../app_routes.dart';
 import '../widgets/custom_textfield.dart';
 
-class Login extends StatelessWidget {
-  const Login({super.key});
+class Register extends StatelessWidget {
+  const Register({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -19,8 +19,14 @@ class Login extends StatelessWidget {
             children: [
               SizedBox(height: screenSize.height * .05),
               const CustomTextField(
-                textInputType: TextInputType.emailAddress,
+                textInputType: TextInputType.text,
                 isPassword: false,
+                hintText: 'Enter Your Username',
+              ),
+              SizedBox(height: screenSize.height * .03),
+              const CustomTextField(
+                textInputType: TextInputType.emailAddress,
+                isPassword: true,
                 hintText: 'Enter Your Email',
               ),
               SizedBox(height: screenSize.height * .03),
@@ -41,23 +47,25 @@ class Login extends StatelessWidget {
                   ),
                 ),
                 onPressed: () {},
-                child: const Text(' Sign In'),
+                child: const Text('Register'),
               ),
               SizedBox(height: screenSize.height * .03),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   const Text(
-                    "Don't have an account? ",
+                    "Already have an account! ",
                     style: TextStyle(
                       fontSize: 18,
                     ),
                   ),
                   TextButton(
                     onPressed: () {
-                     Navigator.pushReplacementNamed(context, AppRoutes.registerRoute);},
+                      Navigator.pushReplacementNamed(
+                          context, AppRoutes.loginRoute);
+                    },
                     child: const Text(
-                      'sign up',
+                      'sign in',
                       style: TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.bold,
