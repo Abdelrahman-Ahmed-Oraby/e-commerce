@@ -1,4 +1,5 @@
-import 'package:ecommerce_app/pages/login.dart';
+import 'package:ecommerce_app/app_routes.dart';
+ 
 import 'package:flutter/material.dart';
 
 void main() {
@@ -10,9 +11,10 @@ class EcommerceApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: Login(),
+      initialRoute: AppRoutes.loginRoute,
+      onGenerateRoute: AppRoutes.generateRoute,
     );
   }
 }
