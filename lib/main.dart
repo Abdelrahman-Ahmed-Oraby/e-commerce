@@ -1,5 +1,5 @@
 import 'package:ecommerce_app/app_routes.dart';
- 
+
 import 'package:flutter/material.dart';
 
 void main() {
@@ -13,7 +13,7 @@ class EcommerceApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return const MaterialApp(
       debugShowCheckedModeBanner: false,
-      initialRoute: AppRoutes.loginRoute,
+      initialRoute: AppRoutes.homeRoute,
       onGenerateRoute: AppRoutes.generateRoute,
     );
   }
