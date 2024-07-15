@@ -1,16 +1,20 @@
+import 'package:ecommerce_app/app_routes.dart';
 import 'package:ecommerce_app/constants/colors.dart';
 import 'package:ecommerce_app/models/product_item.dart';
+import 'package:ecommerce_app/state_managment/provider/cart.dart';
 import 'package:ecommerce_app/widgets/custom_grid_item.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class Home extends StatelessWidget {
   const Home({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final productProvider = Provider.of<Cart>(context);
     return SafeArea(
       child: Scaffold(
-      backgroundColor: Colors.white,
+        backgroundColor: Colors.white,
         appBar: AppBar(
           iconTheme: const IconThemeData(
             color: Colors.white,
@@ -25,38 +29,57 @@ class Home extends StatelessWidget {
             ),
           ),
           actions: [
-            Stack(
+            Row(
               children: [
                 Container(
-                  padding: const EdgeInsets.all(5),
-                  decoration: const BoxDecoration(
-                      color: Color.fromARGB(211, 164, 255, 193),
-                      shape: BoxShape.circle),
-                  child: const Text(
-                    "8",
-                    style: TextStyle(
-                        fontSize: 14, color: Color.fromARGB(255, 0, 0, 0)),
+                  padding: const EdgeInsets.only(top: 1),
+                  width: 60,
+                  height: 60,
+                  child: Stack(
+                    children: [
+                      Positioned(
+                        right: 3,
+                        bottom: 1,
+                        child: IconButton(
+                          onPressed: () {},
+                          icon: const Icon(
+                            Icons.add_shopping_cart,
+                            size: 28,
+                          ),
+                        ),
+                      ),
+                      Positioned(
+                        left: 2,
+                        top: 1,
+                        child: Container(
+                          padding: const EdgeInsets.all(5),
+                          decoration: const BoxDecoration(
+                              color: Color.fromARGB(211, 164, 255, 193),
+                              shape: BoxShape.circle),
+                          child: Text(
+                            '${productProvider.selectedProducts.length}',
+                            style: const TextStyle(
+                                fontSize: 13,
+                                fontWeight: FontWeight.w700,
+                                color: Color.fromARGB(255, 0, 0, 0)),
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                 ),
-                IconButton(
-                  onPressed: () {},
-                  icon: const Icon(
-                    Icons.add_shopping_cart,
-                    size: 24,
+                Padding(
+                  padding: const EdgeInsets.only(right: 16, top: 10),
+                  child: Text(
+                    "\$ ${productProvider.price}",
+                    style: const TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
+                    ),
                   ),
                 ),
               ],
-            ),
-            const Padding(
-              padding: EdgeInsets.only(right: 16),
-              child: Text(
-                "\$13",
-                style: TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.white,
-                ),
-              ),
             ),
           ],
         ),
@@ -119,18 +142,28 @@ class Home extends StatelessWidget {
           ),
         ),
         body: Padding(
-          padding: const EdgeInsets.only(top: 22),
+          padding: const EdgeInsets.only(top: 22, bottom: 22),
           child: GridView.builder(
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2,
-                childAspectRatio: 3 / 2,
+                childAspectRatio: 3 / 2.1,
                 crossAxisSpacing: 10,
                 mainAxisSpacing: 33,
               ),
-              itemCount: 8,
+              itemCount: items.length,
               itemBuilder: (BuildContext context, int index) {
                 return CustomGridItem(
                   productItem: items[index],
+                  onPressed: () {
+                    Navigator.pushNamed(
+                      context,
+                      AppRoutes.detailsRoute,
+                      arguments: items[index],
+                    );
+                  },
+                  addItem: () {
+                    productProvider.addProduct(items[index]);
+                  },
                 );
               }),
         ),
