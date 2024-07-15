@@ -3,15 +3,21 @@ import 'package:flutter/material.dart';
 
 class CustomGridItem extends StatelessWidget {
   final ProductItem productItem;
+  final Function onPressed;
+  final Function addItem;
   const CustomGridItem({
     super.key,
     required this.productItem,
+    required this.onPressed,
+    required this.addItem,
   });
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {},
+      onTap: () {
+        onPressed();
+      },
       child: Stack(
         children: [
           Positioned(
@@ -20,7 +26,7 @@ class CustomGridItem extends StatelessWidget {
             right: 0,
             left: 0,
             child: ClipRRect(
-              borderRadius: BorderRadius.circular(66),
+              borderRadius: BorderRadius.circular(55),
               child: Image.asset(productItem.itemImg),
             ),
           ),
@@ -40,7 +46,9 @@ class CustomGridItem extends StatelessWidget {
                 ),
                 IconButton(
                   color: const Color.fromARGB(255, 62, 94, 70),
-                  onPressed: () {},
+                  onPressed: () {
+                    addItem();
+                  },
                   icon: const Icon(
                     Icons.add,
                     size: 26,

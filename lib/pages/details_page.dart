@@ -1,8 +1,14 @@
 import 'package:ecommerce_app/constants/colors.dart';
 import 'package:flutter/material.dart';
 
+import '../models/product_item.dart';
+
 class Details extends StatefulWidget {
-  const Details({super.key});
+  final ProductItem productItem;
+  const Details({
+    super.key,
+    required this.productItem,
+  });
 
   @override
   State<Details> createState() => _DetailsState();
@@ -67,11 +73,11 @@ class _DetailsState extends State<Details> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            Image.asset('assets/images/flower1.webp'),
+            Image.asset(widget.productItem.itemImg),
             SizedBox(height: screenSize.height * 0.01),
-            const Text(
-              "\$13",
-              style: TextStyle(
+            Text(
+              "\$ ${widget.productItem.itemPrice}",
+              style: const TextStyle(
                 fontSize: 22,
                 fontWeight: FontWeight.w500,
               ),
@@ -127,15 +133,16 @@ class _DetailsState extends State<Details> {
                         ],
                       ),
                       const Spacer(),
-                      const Row(
+                      Row(
                         children: [
-                          Icon(
+                          const Icon(
                             Icons.edit_location,
                             size: 26,
+                            color: Color.fromARGB(168, 3, 65, 27),
                           ),
                           Text(
-                            'Flower Shop',
-                            style: TextStyle(
+                            '${widget.productItem.location}',
+                            style: const TextStyle(
                               fontSize: 20,
                               fontWeight: FontWeight.w600,
                             ),

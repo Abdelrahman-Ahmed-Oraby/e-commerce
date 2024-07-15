@@ -1,6 +1,8 @@
+import 'package:ecommerce_app/models/product_item.dart';
+import 'package:flutter/material.dart';
+
 import 'package:ecommerce_app/pages/details_page.dart';
 import 'package:ecommerce_app/pages/home_page.dart';
-import 'package:flutter/material.dart';
 
 import 'package:ecommerce_app/pages/login_page.dart';
 import 'package:ecommerce_app/pages/register_page.dart';
@@ -15,26 +17,29 @@ class AppRoutes {
     switch (settings.name) {
       case AppRoutes.homeRoute:
         return MaterialPageRoute(
-          builder: (_) => const Home(),
+          builder: (context) => const Home(),
         );
 
       case AppRoutes.loginRoute:
         return MaterialPageRoute(
-          builder: (_) => const Login(),
+          builder: (context) => const Login(),
         );
 
       case AppRoutes.registerRoute:
         return MaterialPageRoute(
-          builder: (_) => const Register(),
+          builder: (context) => const Register(),
         );
       case AppRoutes.detailsRoute:
-        return MaterialPageRoute(
-          builder: (_) => const Details(),
-        );
+        {
+          final args = settings.arguments as ProductItem;
+          return MaterialPageRoute(
+            builder: (context) => Details(productItem: args),
+          );
+        }
 
       default:
         return MaterialPageRoute(
-          builder: (_) => const Home(),
+          builder: (context) => const Home(),
         );
     }
   }
