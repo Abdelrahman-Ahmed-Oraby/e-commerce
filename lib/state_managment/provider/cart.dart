@@ -11,4 +11,15 @@ class Cart with ChangeNotifier {
     price = double.parse(price.toStringAsFixed(2));
     notifyListeners();
   }
+
+  void removeProduct(ProductItem product) {
+    selectedProducts.remove(product);
+    price -= product.itemPrice;
+    price = double.parse(price.toStringAsFixed(2));
+    notifyListeners();
+  }
+
+  int get productsCount {
+    return selectedProducts.length;
+  }
 }
