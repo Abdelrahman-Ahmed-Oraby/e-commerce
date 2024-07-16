@@ -1,4 +1,5 @@
 import 'package:ecommerce_app/constants/colors.dart';
+import 'package:ecommerce_app/widgets/custom_cart.dart';
 import 'package:flutter/material.dart';
 
 import '../models/product_item.dart';
@@ -34,40 +35,8 @@ class _DetailsState extends State<Details> {
             fontWeight: FontWeight.bold,
           ),
         ),
-        actions: [
-          Stack(
-            children: [
-              Container(
-                padding: const EdgeInsets.all(5),
-                decoration: const BoxDecoration(
-                    color: Color.fromARGB(211, 164, 255, 193),
-                    shape: BoxShape.circle),
-                child: const Text(
-                  "8",
-                  style: TextStyle(
-                      fontSize: 14, color: Color.fromARGB(255, 0, 0, 0)),
-                ),
-              ),
-              IconButton(
-                onPressed: () {},
-                icon: const Icon(
-                  Icons.add_shopping_cart,
-                  size: 24,
-                ),
-              ),
-            ],
-          ),
-          const Padding(
-            padding: EdgeInsets.only(right: 16),
-            child: Text(
-              "\$13",
-              style: TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.bold,
-                color: Colors.white,
-              ),
-            ),
-          ),
+        actions: const [
+          CustomCart(),
         ],
       ),
       body: SingleChildScrollView(
