@@ -33,6 +33,7 @@ class CustomCart extends StatelessWidget {
                   icon: const Icon(
                     Icons.add_shopping_cart,
                     size: 28,
+                    color: Colors.white,
                   ),
                 ),
               ),
@@ -47,9 +48,10 @@ class CustomCart extends StatelessWidget {
                   child: Text(
                     '${productProvider.productsCount}',
                     style: const TextStyle(
-                        fontSize: 13,
-                        fontWeight: FontWeight.w700,
-                        color: Color.fromARGB(255, 0, 0, 0)),
+                      fontSize: 13,
+                      fontWeight: FontWeight.w700,
+                      color: Colors.black,
+                    ),
                   ),
                 ),
               ),

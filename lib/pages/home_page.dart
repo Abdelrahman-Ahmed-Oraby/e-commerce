@@ -1,35 +1,36 @@
 import 'package:ecommerce_app/app_routes.dart';
 import 'package:ecommerce_app/constants/colors.dart';
+import 'package:ecommerce_app/firbese/user_auth/fiirebase_auth_services.dart';
 import 'package:ecommerce_app/models/product_item.dart';
 import 'package:ecommerce_app/state_managment/provider/cart.dart';
+import 'package:ecommerce_app/widgets/app_title.dart';
 import 'package:ecommerce_app/widgets/custom_cart.dart';
 import 'package:ecommerce_app/widgets/custom_grid_item.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class Home extends StatelessWidget {
-  const Home({super.key});
+class HomePage extends StatelessWidget {
+  HomePage({super.key});
+
+  final FirebaseAuthService _auth = FirebaseAuthService();
 
   @override
   Widget build(BuildContext context) {
     final productProvider = Provider.of<Cart>(context);
-    return SafeArea(
+    final User user = _auth.getUserInfo()!;
+     return SafeArea(
       child: Scaffold(
-        backgroundColor: Colors.white,
+        backgroundColor: scaffoldBackground,
         appBar: AppBar(
           iconTheme: const IconThemeData(
             color: Colors.white,
           ),
-          backgroundColor: appBarGreen,
-          title: const Text(
-            'Home',
-            style: TextStyle(
-              fontSize: 18,
-              color: Colors.white,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-          actions: [
+          backgroundColor: btnGreen,
+          elevation: 50,
+          title: const AppTitle(),
+          centerTitle: true,
+          actions: const [
             CustomCart(),
           ],
         ),
@@ -40,13 +41,13 @@ class Home extends StatelessWidget {
             children: [
               Column(
                 children: [
-                  const UserAccountsDrawerHeader(
-                    decoration: BoxDecoration(
+                   UserAccountsDrawerHeader(
+                    decoration:const BoxDecoration(
                       image: DecorationImage(
                           image: AssetImage("assets/images/nature.jpg"),
                           fit: BoxFit.cover),
                     ),
-                    accountName: Text(
+                    accountName:const Text(
                       "Alison Miller",
                       style: TextStyle(
                         color: Color.fromARGB(255, 255, 255, 255),
@@ -55,26 +56,30 @@ class Home extends StatelessWidget {
                     accountEmail: Text("alison@hotmail.com"),
                     currentAccountPictureSize: Size.square(80),
                     currentAccountPicture: CircleAvatar(
-                        radius: 55,
-                        backgroundImage:
-                            AssetImage("assets/images/alison.jpg")),
+                      radius: 55,
+                      backgroundImage: NetworkImage('${user.photoURL}'),
+
+                      //  AssetImage("assets/images/alison.jpg"),
+                    ),
                   ),
                   ListTile(
-                      title: Text("Home"),
-                      leading: Icon(Icons.home),
+                      title: const Text("Home"),
+                      leading: const Icon(Icons.home),
                       onTap: () {}),
                   ListTile(
-                      title: Text("My products"),
-                      leading: Icon(Icons.add_shopping_cart),
+                      title: const Text("My products"),
+                      leading: const Icon(Icons.add_shopping_cart),
                       onTap: () {}),
                   ListTile(
-                      title: Text("About"),
-                      leading: Icon(Icons.help_center),
+                      title: const Text("About"),
+                      leading: const Icon(Icons.help_center),
                       onTap: () {}),
                   ListTile(
-                      title: Text("Logout"),
-                      leading: Icon(Icons.exit_to_app),
-                      onTap: () {}),
+                      title: const Text("Logout"),
+                      leading: const Icon(Icons.exit_to_app),
+                      onTap: () {
+                        _auth.signOut();
+                      }),
                 ],
               ),
               Container(
