@@ -4,24 +4,25 @@ import 'package:flutter/material.dart';
 
 import '../models/product_item.dart';
 
-class Details extends StatefulWidget {
+class DetailsPage extends StatefulWidget {
   final ProductItem productItem;
-  const Details({
+  const DetailsPage({
     super.key,
     required this.productItem,
   });
 
   @override
-  State<Details> createState() => _DetailsState();
+  State<DetailsPage> createState() => _DetailsPageState();
 }
 
-class _DetailsState extends State<Details> {
+class _DetailsPageState extends State<DetailsPage> {
   bool isShowMore = true;
   @override
   Widget build(BuildContext context) {
     final Size screenSize = MediaQuery.of(context).size;
 
     return Scaffold(
+      backgroundColor: scaffoldBackground,
       appBar: AppBar(
         iconTheme: const IconThemeData(
           color: Colors.white,

@@ -4,14 +4,15 @@ import 'package:ecommerce_app/widgets/custom_cart.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class CheckOut extends StatelessWidget {
-  const CheckOut({super.key});
+class CheckOutPage extends StatelessWidget {
+  const CheckOutPage({super.key});
 
   @override
   Widget build(BuildContext context) {
     final productProvider = Provider.of<Cart>(context);
 
     return Scaffold(
+      backgroundColor: scaffoldBackground,
       appBar: AppBar(
         iconTheme: const IconThemeData(
           color: Colors.white,
